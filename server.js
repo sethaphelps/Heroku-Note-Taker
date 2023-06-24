@@ -26,10 +26,10 @@ app.get("/notes", (req, res) => {
 
 app.get("/api/notes", (req, res) => {
   fs.readFile("./db/db.json", "utf-8", (err, data) => {
-    const notes = JSON.parse(data);
-    console.log(notes);
-    res.json(notes);
-      // err ? console.log("This is the error.", err) : res.json(JSON.parse(data));
+    // const notes = JSON.parse(data);
+    // console.log(notes);
+    // res.json(notes);
+      err ? console.log("This is the error.", err) : res.json(JSON.parse(data));
 
   });
 });
