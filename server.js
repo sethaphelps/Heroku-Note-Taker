@@ -29,7 +29,7 @@ app.get("/api/notes", (req, res) => {
     const notes = JSON.parse(data);
     console.log(notes);
     res.json(notes);
-      err ? console.log("This is the error.", err) : res.json(JSON.parse(data));
+      // err ? console.log("This is the error.", err) : res.json(JSON.parse(data));
 
   });
 });
