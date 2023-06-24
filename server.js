@@ -24,15 +24,15 @@ app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
-app.get("/api/notes", (req, res) => {
-  fs.readFile("./db/db.json", "utf-8", (err, data) => {
-    // const notes = JSON.parse(data);
-    // console.log(notes);
-    // res.json(notes);
-      err ? console.log("This is the error.", err) : res.json(JSON.parse(data));
+// app.get("/api/notes", (req, res) => {
+//   fs.readFile("./db/db.json", "utf-8", (err, data) => {
+//     // const notes = JSON.parse(data);
+//     // console.log(notes);
+//     // res.json(notes);
+//       err ? console.log("This is the error.", err) : res.json(JSON.parse(data));
 
-  });
-});
+//   });
+// });
 
 app.post("/api/notes", (req, res) => {
   let title = req.body.title;
