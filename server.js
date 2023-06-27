@@ -2,8 +2,6 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const uuidv4 = require("./helpers/uuid");
-// const router = require("express").Router()
-// const store = require("./public/assets/js/index")
 
 const PORT = process.env.PORT || 3001;
 
@@ -24,15 +22,13 @@ app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
-// app.get("/api/notes", (req, res) => {
-//   fs.readFile("./db/db.json", "utf-8", (err, data) => {
-//     // const notes = JSON.parse(data);
-//     // console.log(notes);
-//     // res.json(notes);
-//       err ? console.log("This is the error.", err) : res.json(JSON.parse(data));
+// Makes route for note to populate 
 
-//   });
-// });
+app.get('/api/notes', (req, res) => {
+    fs.readFile('db/db.json', 'utf-8', (err, data) => {
+        err ? console.log(err) : res.json(JSON.parse(data))
+    })
+});
 
 app.post("/api/notes", (req, res) => {
   let title = req.body.title;
@@ -51,15 +47,7 @@ app.post("/api/notes", (req, res) => {
   });
 });
 
-// router.delete("api/notes/:id", (req, res) => {
-//   store 
-//   .deleteNote(req.params.id)
-//   .then(() => res.json({ok:true}))
-//   .catch((err) => res.status(500).json(err))
-// })
-
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`);
 });
 
-// module.exports = router
