@@ -22,12 +22,12 @@ app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
-// Makes route for note to populate 
+// Makes route for note to populate
 
-app.get('/api/notes', (req, res) => {
-    fs.readFile('db/db.json', 'utf-8', (err, data) => {
-        err ? console.log(err) : res.json(JSON.parse(data))
-    })
+app.get("/api/notes", (req, res) => {
+  fs.readFile("db/db.json", "utf-8", (err, data) => {
+    err ? console.log(err) : res.json(JSON.parse(data));
+  });
 });
 
 app.post("/api/notes", (req, res) => {
@@ -47,7 +47,19 @@ app.post("/api/notes", (req, res) => {
   });
 });
 
+app.delete("/api/notes/:id", (req, res) => {
+  fs.readFile("db/db.json", "utf-8", (err, data) => {
+    let currentNotes = JSON.parse(data);
+    let newNote = currentNotes.filter((note) => note.id !== req.params.id);
+    fs.writeFile("db/db.json", JSON.stringify(newNote), (err) => {
+      err
+        ? console.log("this is the error", err)
+        : console.log("This has been deleted." + req.params.id);
+    });
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`);
 });
-
